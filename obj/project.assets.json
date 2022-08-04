@@ -8503,6 +8503,7 @@
     "net5.0": [
       "Microsoft.AspNetCore.Hosting >= 2.2.7",
       "Microsoft.AspNetCore.Mvc >= 2.2.0",
+      "Microsoft.AspNetCore.Mvc.Cors >= 2.2.0",
       "Microsoft.Extensions.DependencyInjection >= 6.0.0",
       "Microsoft.Extensions.Hosting >= 6.0.1",
       "Newtonsoft.Json >= 13.0.1",
@@ -8515,11 +8516,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\interview\\CorrelationCalculator.csproj",
+      "projectUniqueName": "d:\\interview\\CorrelationCalculator.csproj",
       "projectName": "CorrelationCalculator",
-      "projectPath": "D:\\interview\\CorrelationCalculator.csproj",
+      "projectPath": "d:\\interview\\CorrelationCalculator.csproj",
       "packagesPath": "C:\\Users\\xxfox\\.nuget\\packages\\",
-      "outputPath": "D:\\interview\\obj\\",
+      "outputPath": "d:\\interview\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\xxfox\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -8551,6 +8552,10 @@
             "version": "[2.2.7, )"
           },
           "Microsoft.AspNetCore.Mvc": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.AspNetCore.Mvc.Cors": {
             "target": "Package",
             "version": "[2.2.0, )"
           },

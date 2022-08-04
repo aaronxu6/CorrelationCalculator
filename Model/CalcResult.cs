@@ -4,7 +4,7 @@ namespace Interview.Model
     {
         public GeneralStats UsdCadStatus { get; set; }
         public GeneralStats CorraStatus { get; set; }
-        public double Coefficient { get; set; }
+        public double? Coefficient { get; set; }
     }
 
     public class GeneralStats

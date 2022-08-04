@@ -17,16 +17,23 @@ namespace Interview
 
         public async Task<ValetResponse> GetObervationsByDate(string startDate, string endDate)
         {
-            // url can be retrieved from config instead of hard coding here.
-            var url = $"/valet/observations/FXUSDCAD,AVG.INTWO?start_date={startDate}&end_date={endDate}";
-            var response = await client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return JsonConvert.DeserializeObject<ValetResponse>(await response.Content.ReadAsStringAsync());
+                // url can be retrieved from config instead of hard coding here.
+                var url = $"/valet/observations/FXUSDCAD,AVG.INTWO?start_date={startDate}&end_date={endDate}";
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<ValetResponse>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    throw new Exception(await response.Content.ReadAsStringAsync());
+                }
             }
-            else
+            catch(Exception)
             {
-                throw new Exception(await response.Content.ReadAsStringAsync());
+                throw;
             }
         }
     }

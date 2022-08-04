@@ -8,7 +8,7 @@ namespace Interview.Model
     public class ValetResponse
     { 
         [JsonProperty("observations")]
-        public List<Observation> Observations { get; init; }
+        public IEnumerable<Observation> Observations { get; init; }
     }
 
     public class Observation

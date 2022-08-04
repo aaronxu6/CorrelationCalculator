@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Correlation Calculator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(function() {
+        $('#Calculate').on('submit', function() {
+          event.preventDefault();
+          var url = 'http://localhost:5000/correlation/date';
+          var data = $('#Calculate').serialize();
+          $.ajax(url + '?' + data).then(function(data) {
+            $('.output').text(JSON.stringify(data));
+          });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <form id="Calculate" method="get">
+        <p>Please enter start date:</p>
+        <input type="text" name="startDate">
+        <p>Please enter end date:</p>
+        <input type="text" name="endDate">
+        <button type="submit">Submit</button>  
+    </form>
+    <pre class="output"></pre>
+</body>
+</html>

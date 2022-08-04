@@ -1,5 +1,8 @@
+using Interview.Model;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -9,24 +12,32 @@ namespace Interview
     public class CorrelationController : Controller
     { 
         private readonly IValetService service;
+        private readonly ICorrelationCalculator calculator;
 
-        public CorrelationController(IValetService service)
+        public CorrelationController(IValetService service, ICorrelationCalculator calculator)
         {
             this.service = service;
+            this.calculator = calculator;
         }
 
-        // GET api/values 
-        public IEnumerable<string> Get([FromQuery]string startDate, [FromQuery]string endDate)
-        { 
-            return new string[] { "value1", "value2" }; 
-        } 
-
         [HttpGet]
-        [Route("ping")]
-        public async Task<double> Ping() 
+        [Route("date")]
+        public async Task<ActionResult<CalcResult>> Get([FromQuery]string startDate, [FromQuery]string endDate)
         { 
-            var response = await service.GetObervationsByDate("2022-06-21", "2022-06-22");
-            return response.Observations.First().CorraRate.Value;
+            try
+            {
+                if (!DateTime.TryParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _) ||
+                    !DateTime.TryParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                {
+                    return BadRequest("Date format is invalid");
+                }
+                var response = await service.GetObervationsByDate(startDate, endDate);
+                return calculator.GetCalcResult(response);
+            }
+            catch (Exception exception)
+            {
+                return StatusCode(500, exception.Message);
+            }
         }
     } 
 }
